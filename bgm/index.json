@@ -1,0 +1,101 @@
+{
+ "schema": "opensay-bgm-index-v1",
+ "tracks": [
+  {
+   "id": "bgm-apex-heat",
+   "file": "bgm-apex-heat.mp3",
+   "duration": 184.58,
+   "bytes": 5773650,
+   "sha256": "dae45ddc5e734629221a8268634f1743a297dcffd0c75233261c8d9848061287",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-apex-heat.mp3"
+  },
+  {
+   "id": "bgm-azure-spiral",
+   "file": "bgm-azure-spiral.mp3",
+   "duration": 169.77,
+   "bytes": 4581080,
+   "sha256": "1143fbea71dc4b212a80e9447182b611c2831fd0dcab24685d610b5619cfca4b",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-azure-spiral.mp3"
+  },
+  {
+   "id": "bgm-beat-negotiator",
+   "file": "bgm-beat-negotiator.mp3",
+   "duration": 212.17,
+   "bytes": 6356901,
+   "sha256": "2712e44bda146e97ab5d48e090e472d48d315f7038721ed54ab7ad6cfcda5399",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-beat-negotiator.mp3"
+  },
+  {
+   "id": "bgm-card-table-shuffle-original",
+   "file": "bgm-card-table-shuffle-original.mp3",
+   "duration": 114.1,
+   "bytes": 3561571,
+   "sha256": "19cf1ffe61b0847527b7de2aeda58b30db85f7083ef1717ce5a09a13b63f4b64",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-card-table-shuffle-original.mp3"
+  },
+  {
+   "id": "bgm-character-theater-original",
+   "file": "bgm-character-theater-original.mp3",
+   "duration": 224.29,
+   "bytes": 6544929,
+   "sha256": "2610f374939e5fb314180e72d661baced4c80b66dd88d0ccdccc160b0e01b8e6",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-character-theater-original.mp3"
+  },
+  {
+   "id": "bgm-check-the-flow",
+   "file": "bgm-check-the-flow.mp3",
+   "duration": 163.74,
+   "bytes": 4688691,
+   "sha256": "5e6575ab5c385eb8d4ab30a54771387bd595f9f4f4665a5511d9b8f6786409b0",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-check-the-flow.mp3"
+  },
+  {
+   "id": "bgm-cold-steel",
+   "file": "bgm-cold-steel.mp3",
+   "duration": 129.7,
+   "bytes": 3707937,
+   "sha256": "a3f93d420049aa2196d59c99255e982db56114affa9da6dc08fff152bd44b4fc",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-cold-steel.mp3"
+  },
+  {
+   "id": "bgm-heavy-mind",
+   "file": "bgm-heavy-mind.mp3",
+   "duration": 158.96,
+   "bytes": 4799938,
+   "sha256": "016fa281c113f72fa185d7368b124001cb67e7fba74a95745c3e708b7992ddcc",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-heavy-mind.mp3"
+  },
+  {
+   "id": "bgm-lunar-apex",
+   "file": "bgm-lunar-apex.mp3",
+   "duration": 120.61,
+   "bytes": 3404005,
+   "sha256": "09ce7781fa374a324c270cc5bdde575d6a6026a5ed961709e6d4e3d1d72e8d20",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-lunar-apex.mp3"
+  },
+  {
+   "id": "bgm-night-watch",
+   "file": "bgm-night-watch.mp3",
+   "duration": 120.79,
+   "bytes": 3656843,
+   "sha256": "24b67873ce62e7e992252327944ddb0bd9531fa7a0e64ccf9684067766b15600",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-night-watch.mp3"
+  },
+  {
+   "id": "bgm-power-move",
+   "file": "bgm-power-move.mp3",
+   "duration": 150.02,
+   "bytes": 4306793,
+   "sha256": "30756ae9cab13bd0cd70974a907b0f7fd5b7327ace6d778673247c9d712b3937",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-power-move.mp3"
+  },
+  {
+   "id": "bgm-rogue-pulse",
+   "file": "bgm-rogue-pulse.mp3",
+   "duration": 163.13,
+   "bytes": 4791760,
+   "sha256": "8cc068aa41072181cd5d7ad60287c582b411c65e786abbc5187c292654a97853",
+   "url": "https://raw.githubusercontent.com/zhouhang/opensay/main/bgm/bgm-rogue-pulse.mp3"
+  }
+ ]
+}
