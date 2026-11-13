@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "video-release-handoff-v1",
+  "title": "Video release producer handoff",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "producer_skill",
+    "status",
+    "revision",
+    "release_revision_id",
+    "orientation",
+    "title",
+    "cover_headline_text",
+    "cover_headline_lines",
+    "brand_name",
+    "description",
+    "hashtags",
+    "video",
+    "captions",
+    "cover_master",
+    "cover_variants",
+    "release_media_validation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "video-release-handoff-v1"
+    },
+    "producer_skill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "const": "approved"
+    },
+    "revision": {
+      "type": [
+        "string",
+        "integer"
+      ],
+      "minLength": 1
+    },
+    "release_revision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "orientation": {
+      "enum": [
+        "portrait",
+        "landscape"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title_source": {
+      "type": "object",
+      "required": [
+        "policy",
+        "field",
+        "value",
+        "sha256",
+        "approval_note"
+      ],
+      "properties": {
+        "policy": {
+          "const": "reuse-upstream-title-v1"
+        },
+        "field": {
+          "enum": [
+            "原创标题",
+            "user-supplied"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "approval_note": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "field": {
+                "const": "原创标题"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "record_id"
+            ]
+          }
+        }
+      ]
+    },
+    "cover_headline_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cover_headline_lines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "brand_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description_policy": {
+      "type": "string",
+      "enum": [
+        "content-participation-v1",
+        "user-supplied-release-v1"
+      ]
+    },
+    "description_interaction": {
+      "type": "object",
+      "required": [
+        "type",
+        "text",
+        "content_anchor"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "discussion",
+            "interaction",
+            "experience",
+            "help"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_anchor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answer_format": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "hashtags": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "video": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "captions": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "cover_master": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "release_media_validation": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "primary_cover_variant_id": {
+      "enum": [
+        "douyin_cover",
+        "xiaohongshu_cover",
+        "wechat_channels_home",
+        "wechat_channels_share"
+      ]
+    },
+    "cover_variants": {
+      "type": "object",
+      "required": [
+        "douyin_cover",
+        "xiaohongshu_cover",
+        "wechat_channels_home",
+        "wechat_channels_share"
+      ],
+      "properties": {
+        "douyin_cover": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "xiaohongshu_cover": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "wechat_channels_home": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "wechat_channels_share": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "bilibili_cover": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      },
+      "additionalProperties": false
+    },
+    "cover_asset_strategy": {
+      "const": "one_asset_per_dimensions"
+    },
+    "cover_assets_by_size": {
+      "type": "object",
+      "properties": {
+        "1080x1440": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "1600x1200": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "1920x1080": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^/"
+      }
+    },
+    "platform_cover_map": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9]+x[0-9]+$"
+      }
+    },
+    "user_release_source": {
+      "type": "object",
+      "required": [
+        "policy",
+        "snapshot_path",
+        "snapshot_sha256",
+        "record_id",
+        "authorization_note"
+      ],
+      "properties": {
+        "policy": {
+          "const": "user-supplied-release-v1"
+        },
+        "snapshot_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshot_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorization_note": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "script_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "producer_skill": {
+            "const": "sticker"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "title_source"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "description_policy"
+        ],
+        "properties": {
+          "description_policy": {
+            "const": "user-supplied-release-v1"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "user_release_source",
+          "script_sha256"
+        ]
+      },
+      "else": {
+        "required": [
+          "description_interaction"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}

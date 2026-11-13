@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "segment-v2.schema.json",
+  "title": "OpenSay segment contract v2",
+  "description": "片段契约：由引擎探测或模板声明提供。物理事实字段以引擎实测为准；语义字段可来自模板声明；policy 字段引擎独占。",
+  "type": "object",
+  "required": [
+    "contractVersion",
+    "templateId",
+    "rendererSha256",
+    "segments"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contractVersion": {
+      "const": "segment-v2"
+    },
+    "templateId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "templatePath": {
+      "type": "string"
+    },
+    "engineVersion": {
+      "type": "string",
+      "description": "产生本文件 / 最后一次 resolve 的引擎版本，如 contract-1"
+    },
+    "rendererSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source": {
+      "enum": [
+        "declaration",
+        "probed",
+        "resolved"
+      ],
+      "description": "declaration=模板自带；probed=纯探测；resolved=引擎验收后的结果"
+    },
+    "canvas": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "fps": {
+          "type": "number"
+        }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "语义：模板声明或人工填写；测不出来"
+          },
+          "expresses": {
+            "type": "string"
+          },
+          "notExpresses": {
+            "type": "string"
+          },
+          "sourceReference": {
+            "type": "string"
+          },
+          "states": {
+            "type": "array",
+            "description": "物理事实：画面发生结构性变化的时间点（秒，相对片段起点）",
+            "items": {
+              "type": "object",
+              "required": [
+                "at"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "at": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "strength": {
+                  "type": "number",
+                  "description": "该切点的帧差强度 0-100"
+                }
+              }
+            }
+          },
+          "settleSeconds": {
+            "type": "number",
+            "description": "最后一次结构性变化的时间；之后只有环境动或静止"
+          },
+          "ambient": {
+            "type": "boolean",
+            "description": "settle 之后是否仍有持续的小幅运动（如旋转球体）"
+          },
+          "changeRate": {
+            "type": "number",
+            "description": "结构性变化次数 / 观察时长（次/秒）"
+          },
+          "suggestedShot": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "ideal": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              }
+            }
+          },
+          "assetSlots": {
+            "type": "array",
+            "description": "逐模块实际替换素材渲染通过的内容类型；源码正则只进入assetSlotCandidates，不在此声称能力",
+            "items": {
+              "enum": [
+                "text",
+                "number",
+                "image",
+                "video"
+              ]
+            }
+          },
+          "captionSafeBand": {
+            "type": "array",
+            "description": "归一化 [top,bottom]，片段自身内容不占用的底部区间",
+            "items": {
+              "type": "number"
+            }
+          },
+          "bottomOccupancy": {
+            "type": "number",
+            "description": "底部 18% 区域的非背景像素占比，用于判断字幕卡是否压到内容"
+          },
+          "probeConfidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "policyApplied": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assetSlotCandidates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assetSlotsVerified": {
+            "type": "boolean"
+          },
+          "production_ready": {
+            "type": "boolean"
+          },
+          "cadencePolicy": {
+            "type": "object",
+            "required": [
+              "maxGapBetweenChanges",
+              "passed",
+              "gaps"
+            ],
+            "properties": {
+              "maxGapBetweenChanges": {
+                "type": "number"
+              },
+              "passed": {
+                "type": "boolean"
+              },
+              "gaps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "from": {
+                      "type": "number"
+                    },
+                    "to": {
+                      "type": "number"
+                    },
+                    "seconds": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "production_ready": {
+      "type": "boolean"
+    }
+  }
+}

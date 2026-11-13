@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sticker 视频制作"
+  short_description: "用真人口播和 OpenSay 模板做成片，标题文案由用户自己写"
+  default_prompt: "用 $sticker 把这条口播做成视频：选模板、逐镜编排、出完整预览给我确认，确认后交给 short-release。"

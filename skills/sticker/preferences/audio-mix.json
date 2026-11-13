@@ -1,0 +1,663 @@
+{
+  "schema": "sticker-user-audio-mix-preference-v1",
+  "status": "confirmed",
+  "active_profile": {
+    "id": "heard-bgm-plus8-2026-11-12",
+    "version": 1,
+    "status": "confirmed",
+    "confirmed_user_text": "BGM +8 dB",
+    "confirmation_source": "Current Codex conversation, exact root-owned selection receipt; no message identifier invented.",
+    "selection_receipt": {
+      "sha256": "2c8e8e152476360a99c5d127e397bda234fcc8879558a187faeb5efa89166f84"
+    },
+    "approved_audio": {
+      "sha256": "afe9a6cdd27bea257f2c35361ff859042c1ffb88a090989ec23039edcda5877d",
+      "integrated_lufs": -16.16,
+      "true_peak_dbfs": -2.48,
+      "mono_fold_change_db": -0.03437089712309671
+    },
+    "approval_scope": "This selected audio mix and its level/ratio reference are approved for the requested video revision and Sticker default standard. This is not approval of a new full film, cover, release package or publication.",
+    "full_film_approved": false,
+    "source_bindings": {
+      "selected_mix_choice": {
+        "sha256": "2c8e8e152476360a99c5d127e397bda234fcc8879558a187faeb5efa89166f84"
+      },
+      "selected_audio": {
+        "sha256": "afe9a6cdd27bea257f2c35361ff859042c1ffb88a090989ec23039edcda5877d"
+      },
+      "original_voice": {
+        "sha256": "6302a19476954ad9a48766121ae178a78b8cca1dbb8ea1b6abce9606cd50d06c"
+      },
+      "prepared_voice": {
+        "sha256": "cdea75c9a0c4569b8af79d4593dc3a696194a6f387bffcc23db6dd5cf7a408ec"
+      },
+      "derived_music": {
+        "sha256": "46325b48df5b477cd0e23a72e49236f5063b5f36b35ed94e2012f499228fc452"
+      },
+      "voice_timeline": {
+        "sha256": "7ba0864b45cf1b7906347129b3f5f6481e96e743a762672917eaf962dab66493"
+      },
+      "selected_audio_parameter_snapshot": {
+        "sha256": "96919ca01b7d4a5454385e2ea0117d11f6fefa4181938f76367a251c99fba2f0"
+      },
+      "actual_mix_report": {
+        "sha256": "6e72959d38025fdfacf08b68c90b1f64d44e3a9bc2245f85d0669dd5d23b52ea"
+      },
+      "actual_stem_report": {
+        "sha256": "e89f4869deec45bbbf40ad75e3a0d7b7a29d111014168f9c1132e8663490938a"
+      },
+      "dry_voice_stem": {
+        "sha256": "bb144af5a20c60c5cc2a2e29c605e3e569a4b393da33018b38d070afac68c2eb"
+      },
+      "selected_plus8_ducked_bgm_stem": {
+        "sha256": "c0d633d79f62a93e1b0d692c82fbdc8eb665ce6e6dfecc83627f5062073d081c"
+      }
+    },
+    "measurement_reports": {
+      "absolute_mix_and_music_only": {
+        "sha256": "cf0d553247eb6e3b18b91dac0bc885fdd34e51c390e72aaab52464ad0bc0ff08"
+      },
+      "source_and_unfaded_music_context": {
+        "sha256": "4da367a6d1c9f384d88786d993e4384a1c70c7f64ab07f87752851b6308b9145"
+      },
+      "sfx_all22": {
+        "sha256": "147fdc949deea9a18adf314a8f4217736d2f72d191a75c90ad2b1a7167a05cc7"
+      },
+      "sfx_summary": {
+        "sha256": "e00b536bad4e2a5f0f662d69dd6984e5c090221e2c1606585a4ba41b346671ed"
+      },
+      "sfx_compact_reference": {
+        "sha256": "b5eb8fa24bc12fd7f03b067d42d2166188f5c174b0ff4f1e4fcd496346b9c2c4"
+      }
+    },
+    "full_encoded_mix_observed": {
+      "integrated_lufs": -16.16,
+      "true_peak_dbfs": -2.48,
+      "loudness_range_lu": 2.4,
+      "scope": "Direct measurement of the exact selected AAC, not a newly remixed version."
+    },
+    "music_only_references": {
+      "ending_with_fade": {
+        "film_interval": [
+          195.698667,
+          200.698667
+        ],
+        "frames": 240000,
+        "integrated_lufs": -16.8,
+        "rms_dbfs": -18.76442121588839,
+        "true_peak_dbfs": -4.72,
+        "loudness_range_lu": 4.6,
+        "derived_excerpt": {
+          "sha256": "20110f013f700dc3fde1534d5d050fdacaf429ed7e65c4fa3b3a6078b19ad6d6",
+          "codec": "pcm_f32le",
+          "processing": "Exact decoded sample interval only; no gain or normalization change."
+        }
+      },
+      "unfaded_short_context": {
+        "film_interval": [
+          195.698667,
+          197.698667
+        ],
+        "duration": 2,
+        "rms_dbfs": -16.555608194949116,
+        "integrated_lufs": -14.52,
+        "true_peak_dbfs": -4.72,
+        "lra_lu": 0.0,
+        "scope": "Actual selectedAAC two-second observed music context before final3s sourcefade; short rhythmic sample, not a universal full-song loudness target."
+      },
+      "opening_not_pure_bgm": {
+        "pure_bgm": false,
+        "film_interval": [
+          0,
+          5
+        ],
+        "integrated_lufs": -15.32,
+        "rms_dbfs": -17.771527676799895,
+        "true_peak_dbfs": -4.46
+      },
+      "interpretation": "Ending5s includes3s source fade plus endpoint bus fade; the2s context before that fade is a short observed steady-music reference. Do not force a whole track to the faded-tail average, or use the SFX-containing opening as pure BGM."
+    },
+    "narration_reference": {
+      "sha256": "99ff78bb46c068c12d3b28e0ddff60d17b6f12eed63f84ec3713290d7f80d836",
+      "source": {
+        "sha256": "6302a19476954ad9a48766121ae178a78b8cca1dbb8ea1b6abce9606cd50d06c",
+        "duration": 190.698667
+      },
+      "before": {
+        "integrated_lufs": -40.13,
+        "true_peak_dbfs": -17.14,
+        "lra_lu": 7.8
+      },
+      "after": {
+        "integrated_lufs": -16.78,
+        "true_peak_dbfs": -1.99,
+        "lra_lu": 3.2
+      },
+      "speed_changed": false,
+      "content_start_shift_seconds": 0
+    },
+    "source_music_reference": {
+      "sha256": "46325b48df5b477cd0e23a72e49236f5063b5f36b35ed94e2012f499228fc452",
+      "integrated_lufs": -14.57,
+      "true_peak_dbfs": -1.8,
+      "lra_lu": 2.2
+    },
+    "voice_bgm_relation_reference": {
+      "measurement_stage": "Actual original prepared dry voice and selected envelope/ducked music stems before common nonlinear limiter/master/AAC; not separated from final bus.",
+      "word_interval_union_seconds": 187.1,
+      "dry_voice_rms_dbfs": -19.857069873528467,
+      "ducked_music_rms_dbfs": -23.951235372896093,
+      "voice_minus_music_rms_db": 4.094165499367627,
+      "one_second_windows": {
+        "energy_active_count": 186,
+        "rule": "At least0.15s real word coverage and dry voice RMS>=-40dBFS; the2lower-energy annotated intervals remain separately documented.",
+        "music_at_or_above_voice_count": 35,
+        "weakest_active_window": {
+          "film_interval": [
+            64,
+            65
+          ],
+          "source_interval": [
+            59,
+            60
+          ],
+          "annotated_word_seconds": 1.0,
+          "text": "不能放图还有文",
+          "voice_rms_dbfs": -26.257037378765958,
+          "music_rms_dbfs": -21.43115762854332,
+          "voice_minus_music_rms_db": -4.8258797502226365,
+          "energy_active": true
+        },
+        "quiet_annotated_windows": [
+          {
+            "film_interval": [
+              140,
+              141
+            ],
+            "source_interval": [
+              135,
+              136
+            ],
+            "annotated_word_seconds": 1.0,
+            "text": "每一个",
+            "voice_rms_dbfs": -65.70715721840949,
+            "music_rms_dbfs": -16.43527595767639,
+            "voice_minus_music_rms_db": -49.2718812607331,
+            "energy_active": false
+          },
+          {
+            "film_interval": [
+              184,
+              185
+            ],
+            "source_interval": [
+              179,
+              180
+            ],
+            "annotated_word_seconds": 1.0,
+            "text": "达初衷就是",
+            "voice_rms_dbfs": -49.868178040068756,
+            "music_rms_dbfs": -17.028204260198965,
+            "voice_minus_music_rms_db": -32.839973779869794,
+            "energy_active": false
+          }
+        ]
+      },
+      "user_choice_effect": "The complete mix was chosen after three auditions. These measurements document the selected strong-BGM style;35low-margin windows do not invalidate this choice or authorize automatic attenuation/reconfirmation."
+    },
+    "sfx_relation_reference": {
+      "event_count": 22,
+      "unique_source_count": 8,
+      "measurement_stage": "Exact declared SFX source gain and actual millisecond placement vs simultaneous prepared dry VO and selected+8dB envelope/ducked BGM before common limiter/master/AAC. Not SFX separated from final bus.",
+      "windows_ms": [
+        80,
+        100,
+        200
+      ],
+      "window_placements": [
+        "first",
+        "effective_onset",
+        "strongest"
+      ],
+      "strongest80_all_events": {
+        "events": 22,
+        "sfx_minus_voice_plus_music_rms_db_all": {
+          "n": 22,
+          "p10": -17.186576453986117,
+          "median": -10.025798633442102,
+          "p90": -2.5036502722934406,
+          "minimum": -17.88682510306206,
+          "maximum": 5.745459755595803
+        },
+        "sfx_minus_voice_plus_music_sample_peak_db_all": {
+          "n": 22,
+          "p10": -16.716111681402918,
+          "median": -10.821725767589037,
+          "p90": -2.1761447343113045,
+          "minimum": -18.759786131354343,
+          "maximum": 4.904897873355061
+        },
+        "dry_voice_energy_active_count": 14,
+        "sfx_minus_voice_rms_db_energy_active_only": {
+          "n": 14,
+          "p10": -16.305806621037167,
+          "median": -5.658651242467778,
+          "p90": 0.46024538128900994,
+          "minimum": -17.752238114318445,
+          "maximum": 4.760060228812694
+        },
+        "sfx_minus_voice_plus_music_rms_db_energy_active_only": {
+          "n": 14,
+          "p10": -17.238845536544364,
+          "median": -8.695645046276843,
+          "p90": -2.546443366732517,
+          "minimum": -17.88682510306206,
+          "maximum": -0.2593762423364545
+        },
+        "dry_voice_low_energy_count": 8,
+        "sfx_minus_music_rms_db_low_voice_only": {
+          "n": 8,
+          "p10": -15.57430529199523,
+          "median": -12.342603395088107,
+          "p90": -1.9670913202727203,
+          "minimum": -17.24007338586099,
+          "maximum": 5.745459755595803
+        }
+      },
+      "first80_all_events": {
+        "events": 22,
+        "sfx_minus_voice_plus_music_rms_db_all": {
+          "n": 22,
+          "p10": -27.936934441336177,
+          "median": -14.312654149967818,
+          "p90": -2.8661292347488794,
+          "minimum": -32.89241589027827,
+          "maximum": 5.745459755595803
+        },
+        "sfx_minus_voice_plus_music_sample_peak_db_all": {
+          "n": 22,
+          "p10": -23.615564220493066,
+          "median": -13.232207363154846,
+          "p90": -5.463972157156067,
+          "minimum": -29.588750427335356,
+          "maximum": 4.904897873355061
+        },
+        "dry_voice_energy_active_count": 15,
+        "sfx_minus_voice_rms_db_energy_active_only": {
+          "n": 15,
+          "p10": -23.38587805243525,
+          "median": -10.4588660658247,
+          "p90": 0.06226683985329423,
+          "minimum": -27.180198197938513,
+          "maximum": 4.760060228812694
+        },
+        "sfx_minus_voice_plus_music_rms_db_energy_active_only": {
+          "n": 15,
+          "p10": -27.601554510739597,
+          "median": -13.65766124736248,
+          "p90": -3.375859347187685,
+          "minimum": -28.253644204228365,
+          "maximum": -0.2593762423364545
+        },
+        "dry_voice_low_energy_count": 7,
+        "sfx_minus_music_rms_db_low_voice_only": {
+          "n": 7,
+          "p10": -25.07700729162235,
+          "median": -17.24007338586099,
+          "p90": -5.440885859295123,
+          "minimum": -32.89241589027827,
+          "maximum": 5.745459755595803
+        }
+      },
+      "by_kind": {
+        "curtain": {
+          "count": 2,
+          "source_duration_seconds": {
+            "n": 2,
+            "p10": 0.9,
+            "median": 0.9,
+            "p90": 0.9,
+            "minimum": 0.9,
+            "maximum": 0.9
+          },
+          "strongest80_sfx_minus_background_rms_db": {
+            "n": 2,
+            "p10": -17.149399770360738,
+            "median": -15.86291460689898,
+            "p90": -14.576429443437226,
+            "minimum": -17.471021061226175,
+            "maximum": -14.254808152571787
+          },
+          "strongest80_sfx_minus_background_sample_peak_db": {
+            "n": 2,
+            "p10": -18.021842768904612,
+            "median": -15.070069319105698,
+            "p90": -12.118295869306783,
+            "minimum": -18.759786131354343,
+            "maximum": -11.380352506857054
+          }
+        },
+        "msg": {
+          "count": 2,
+          "source_duration_seconds": {
+            "n": 2,
+            "p10": 0.14,
+            "median": 0.14,
+            "p90": 0.14,
+            "minimum": 0.14,
+            "maximum": 0.14
+          },
+          "strongest80_sfx_minus_background_rms_db": {
+            "n": 2,
+            "p10": -2.452534901776,
+            "median": -1.4777977198028687,
+            "p90": -0.5030605378297373,
+            "minimum": -2.696219197269283,
+            "maximum": -0.2593762423364545
+          },
+          "strongest80_sfx_minus_background_sample_peak_db": {
+            "n": 2,
+            "p10": -5.202606255773928,
+            "median": -4.237087275309839,
+            "p90": -3.27156829484575,
+            "minimum": -5.44398600088995,
+            "maximum": -3.0301885497297274
+          }
+        },
+        "pop": {
+          "count": 6,
+          "source_duration_seconds": {
+            "n": 6,
+            "p10": 0.09,
+            "median": 0.09,
+            "p90": 0.09,
+            "minimum": 0.09,
+            "maximum": 0.09
+          },
+          "strongest80_sfx_minus_background_rms_db": {
+            "n": 6,
+            "p10": -16.969032539156792,
+            "median": -14.260214896718361,
+            "p90": -6.231176953272261,
+            "minimum": -17.240962432693447,
+            "maximum": -4.693438811885471
+          },
+          "strongest80_sfx_minus_background_sample_peak_db": {
+            "n": 6,
+            "p10": -16.963686186522796,
+            "median": -14.518334505503029,
+            "p90": -11.360061006302182,
+            "minimum": -17.088101295286094,
+            "maximum": -9.511719849330548
+          }
+        },
+        "stamp": {
+          "count": 1,
+          "source_duration_seconds": {
+            "n": 1,
+            "p10": 0.3,
+            "median": 0.3,
+            "p90": 0.3,
+            "minimum": 0.3,
+            "maximum": 0.3
+          },
+          "strongest80_sfx_minus_background_rms_db": {
+            "n": 1,
+            "p10": -9.622374997894635,
+            "median": -9.622374997894635,
+            "p90": -9.622374997894635,
+            "minimum": -9.622374997894635,
+            "maximum": -9.622374997894635
+          },
+          "strongest80_sfx_minus_background_sample_peak_db": {
+            "n": 1,
+            "p10": -10.513226039937194,
+            "median": -10.513226039937194,
+            "p90": -10.513226039937194,
+            "minimum": -10.513226039937194,
+            "maximum": -10.513226039937194
+          }
+        },
+        "swish": {
+          "count": 4,
+          "source_duration_seconds": {
+            "n": 4,
+            "p10": 0.22,
+            "median": 0.22,
+            "p90": 0.22,
+            "minimum": 0.22,
+            "maximum": 0.22
+          },
+          "strongest80_sfx_minus_background_rms_db": {
+            "n": 4,
+            "p10": -9.949818099271447,
+            "median": -7.290540149602963,
+            "p90": -3.4625391863347623,
+            "minimum": -10.42922226898957,
+            "maximum": -2.482253725073903
+          },
+          "strongest80_sfx_minus_background_sample_peak_db": {
+            "n": 4,
+            "p10": -10.154562978025815,
+            "median": -7.239530965022091,
+            "p90": -3.4371891315858685,
+            "minimum": -11.130225495240879,
+            "maximum": -2.0812509770425933
+          }
+        },
+        "thud": {
+          "count": 2,
+          "source_duration_seconds": {
+            "n": 2,
+            "p10": 0.35,
+            "median": 0.35,
+            "p90": 0.35,
+            "minimum": 0.35,
+            "maximum": 0.35
+          },
+          "strongest80_sfx_minus_background_rms_db": {
+            "n": 2,
+            "p10": -3.3812416392991773,
+            "median": 0.6750700917652583,
+            "p90": 4.731381822829695,
+            "minimum": -4.3953195720652865,
+            "maximum": 5.745459755595803
+          },
+          "strongest80_sfx_minus_background_sample_peak_db": {
+            "n": 2,
+            "p10": -4.588973019860502,
+            "median": -0.3694748450980292,
+            "p90": 3.8500233296644435,
+            "minimum": -5.64384756355112,
+            "maximum": 4.904897873355061
+          }
+        },
+        "tick": {
+          "count": 2,
+          "source_duration_seconds": {
+            "n": 2,
+            "p10": 0.03,
+            "median": 0.03,
+            "p90": 0.03,
+            "minimum": 0.03,
+            "maximum": 0.03
+          },
+          "strongest80_sfx_minus_background_rms_db": {
+            "n": 2,
+            "p10": -17.47439656814199,
+            "median": -15.824682428461726,
+            "p90": -14.174968288781459,
+            "minimum": -17.88682510306206,
+            "maximum": -13.762539753861393
+          },
+          "strongest80_sfx_minus_background_sample_peak_db": {
+            "n": 2,
+            "p10": -12.696098719139197,
+            "median": -10.45644334355249,
+            "p90": -8.216787967965784,
+            "minimum": -13.256012563035874,
+            "maximum": -7.656874124069107
+          }
+        },
+        "whoosh": {
+          "count": 3,
+          "source_duration_seconds": {
+            "n": 3,
+            "p10": 0.4,
+            "median": 0.4,
+            "p90": 0.4,
+            "minimum": 0.4,
+            "maximum": 0.4
+          },
+          "strongest80_sfx_minus_background_rms_db": {
+            "n": 3,
+            "p10": -14.431049114990314,
+            "median": -13.04915816263426,
+            "p90": -6.818989199050103,
+            "minimum": -14.776521853079327,
+            "maximum": -5.261446958154064
+          },
+          "strongest80_sfx_minus_background_sample_peak_db": {
+            "n": 3,
+            "p10": -14.76833653225306,
+            "median": -11.588770714834538,
+            "p90": -3.8170704949922536,
+            "minimum": -15.563227986607691,
+            "maximum": -1.8741454400316826
+          }
+        }
+      },
+      "role": "Descriptive reference distribution of the heard mix, not a universal foreground-SFX threshold. Match comparable motion/roles and measure actual new sources.",
+      "individual_listening_claim": "Whole-mix choice confirmed; no separate per-event listening approval or automatic audibility PASS is invented. Low/zero voice windows are not divided into infinity."
+    },
+    "episode_parameters_reference": {
+      "speech_music_gain": 1.0378898155290608,
+      "historical_increment_vs_r11_db": 8,
+      "intro_gain": 1,
+      "silence_gain": 1,
+      "duck": {
+        "threshold": 0.02,
+        "ratio": 4,
+        "attack_ms": 80,
+        "release_ms": 320
+      },
+      "automation": {
+        "kind": "speech-aware",
+        "energy_threshold_dbfs": -42,
+        "min_silence_seconds": 0.6,
+        "attack_seconds": 0.12,
+        "hold_seconds": 0.25,
+        "release_seconds": 0.45
+      },
+      "local_protection": {
+        "binding": {
+          "sha256": "d2ae247e780cc510a6a169f0dc6ed1481ade52aa4e04ddd7480cf191909de9ef"
+        },
+        "windows": [
+          {
+            "start": 24,
+            "end": 25,
+            "attenuation_db": 4,
+            "reason": "Actual source-word window 模型国产模; base sidechain measured VO-minus-music -0.450dB. Additional local duck preserves requested speaking baseline elsewhere."
+          },
+          {
+            "start": 28,
+            "end": 29,
+            "attenuation_db": 4,
+            "reason": "Actual source-word window 效但是; base sidechain measured VO-minus-music -0.465dB. Additional local duck preserves requested speaking baseline elsewhere."
+          },
+          {
+            "start": 72,
+            "end": 73,
+            "attenuation_db": 5.5,
+            "reason": "Actual source-word window 视频那; base sidechain measured VO-minus-music -1.788dB. Additional local duck preserves requested speaking baseline elsewhere."
+          },
+          {
+            "start": 76,
+            "end": 77,
+            "attenuation_db": 1.5,
+            "reason": "Actual source-word window 什么样如果; base sidechain measured VO-minus-music 2.211dB. Additional local duck preserves requested speaking baseline elsewhere."
+          },
+          {
+            "start": 120,
+            "end": 121,
+            "attenuation_db": 3,
+            "reason": "Actual source-word window 出来的这里说; base sidechain measured VO-minus-music 0.918dB. Additional local duck preserves requested speaking baseline elsewhere."
+          },
+          {
+            "start": 142,
+            "end": 143,
+            "attenuation_db": 4.5,
+            "reason": "Actual source-word window 素材不锁; base sidechain measured VO-minus-music -0.731dB. Additional local duck preserves requested speaking baseline elsewhere."
+          }
+        ],
+        "reuse_scope": "This episode only. Do not copy its6word/time windows into future episodes."
+      },
+      "master_targets": {
+        "target_lufs": -16,
+        "true_peak_dbfs": -2.7
+      },
+      "music_source_skip_seconds": 7,
+      "prelude_seconds": 5,
+      "postlude_seconds": 5,
+      "context_only": "Linear gains, source skip, duration choices and individual SFX gain/at values are this episode’s reproducible parameters, not universal defaults."
+    },
+    "future_default": {
+      "strategy": "Per-source calibration to the heard absolute and relative references, not mechanically adding8dB to every BGM.",
+      "narration": "Measure and calibrate each actual voice first, preserving source timing; reference calibrated voice was-16.78LUFS/-1.99dBTP.",
+      "music_only": "Use the measured unfaded music context and faded ending separately, accounting for the actual new music dynamics, fades and master. Silence gain1 is an input setting, never a final loudness claim.",
+      "during_speech": "Begin from the selected word-union dry-voice/music RMS relationship of approximately+4.09dB with word/energy-aware smooth duck, then verify the current encoded output and context. Do not reduce the chosen style merely to make every short window exceed a generic margin.",
+      "sfx": "Measure each real action sound against simultaneous VO+BGM at80/100/200ms; slow attacks use their actual effective/strongest envelope. Compare by role/kind rather than forcing all sounds to one median.",
+      "mix_bus": "Record actual wholeAAC LUFS/TP and actual no-voice segment levels after shared processing; match the heard relationships instead of assuming identical input gains imply identical output levels.",
+      "workflow": "Reuse this confirmed preference without new three-way auditions or repeated approval. Later explicit user changes override it. Full-film/release review boundaries stay as previously authorized."
+    }
+  },
+  "pending_audition": null,
+  "future_reuse": "Per-source calibration to the heard absolute and relative references, not mechanically adding8dB to every BGM.",
+  "audition_history": [
+    {
+      "episode": "别让剪辑消耗你的表达欲",
+      "request_sha256": "2b31e6c927f368dcf38bacb61a58dafe04f8b26371b87ff9db85fe44cf0c62ca",
+      "baseline": "r11",
+      "subject": "BGM during narration only",
+      "candidate_relative_db": [
+        8,
+        15,
+        20
+      ],
+      "user_text": "你这样，分别提高8db、15db、20db的音频，我听听，确认后再制作，并且把只有bgm的音量和bgm和旁白音效配比做成标准到sticker",
+      "selected_candidate": null,
+      "approved_audio": null,
+      "manifest": {
+        "sha256": "7341ba058d7e28769adb0dd9b46a6823eb7bfa9b5600e5e1d38e7b10f5967cb7"
+      },
+      "review_url": "http://127.0.0.1:8877/revision-r11/r11.1/auditions.html",
+      "audio_files": [
+        {
+          "sha256": "afe9a6cdd27bea257f2c35361ff859042c1ffb88a090989ec23039edcda5877d",
+          "integrated_lufs": -16.16,
+          "true_peak_dbfs": -2.48,
+          "mono_fold_change_db": -0.03437089712309671
+        },
+        {
+          "sha256": "371b0d941b4dcf155a3bffa724512375b3d8949fc9d75b345b9789865fbda459",
+          "integrated_lufs": -16.07,
+          "true_peak_dbfs": -2.33,
+          "mono_fold_change_db": -0.06501725203340669
+        },
+        {
+          "sha256": "e4c5b9ff518b19a496b7b8981d515b42751a78f319c8cc4b2db2a7637d803dc5",
+          "integrated_lufs": -16.04,
+          "true_peak_dbfs": -4.26,
+          "mono_fold_change_db": -0.08433501865306425
+        }
+      ],
+      "status": "historical_three_version_audition_completed",
+      "selection_recorded_in": {
+        "sha256": "2c8e8e152476360a99c5d127e397bda234fcc8879558a187faeb5efa89166f84"
+      }
+    }
+  ],
+  "updated_at": "2026-11-12T09:06:13.470531+08:00",
+  "note_paths_removed": "发布版去掉了原始试听与成片文件的本机路径，只保留混音参数与测量值"
+}
