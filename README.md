@@ -26,3 +26,11 @@ OpenSay 是一个口播视频模板库：把一段真人口播的音频或视频
 |---|---|---|
 | ![问题卡](docs/previews/问题卡.gif)<br>问题卡 | ![因果链](docs/previews/因果链.gif)<br>因果链 | ![柱状对比](docs/previews/柱状对比.gif)<br>柱状对比 |
 | ![真人换位](docs/previews/真人换位.gif)<br>真人换位 | ![物件卡](docs/previews/物件卡.gif)<br>物件卡加 logo | ![浏览器演示](docs/previews/浏览器演示.gif)<br>浏览器演示 |
+
+## skills/
+
+给 agent 用的技能（复制到你的 agent 技能目录即可，例如 Claude Code 的 `~/.claude/skills/`、Codex 的 `~/.codex/skills/`）：
+
+| 技能 | 用途 |
+|---|---|
+| [`opensay-template-builder`](skills/opensay-template-builder/) | 从一条参考视频新建 OpenSay 模板，或给已有模板补同风格的模块；包含开发规范、准入检查与测试脚本 |

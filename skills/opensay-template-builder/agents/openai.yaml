@@ -1,0 +1,8 @@
+interface:
+  display_name: "OpenSay 模板开发"
+  short_description: "从参考视频创建模板，或为真实分镜扩展同风格独立模块"
+  default_prompt: "使用 $opensay-template-builder 为参考视频创建 OpenSay 模板，或根据本期镜头缺口扩展已有模板并验证动态效果。"
+policy:
+  allow_implicit_invocation: true
+  products:
+    - "codex"
