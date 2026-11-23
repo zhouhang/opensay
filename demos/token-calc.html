@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="AI Token 费用计算器：按 Token 用量与每百万 Token 单价，实时估算大模型调用成本。">
+<title>AI Token 费用计算器</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f4f7f8;
+    --dot: rgba(15, 23, 42, 0.10);
+    --surface: rgba(255, 255, 255, 0.86);
+    --surface-solid: #ffffff;
+    --input-bg: rgba(15, 23, 42, 0.025);
+    --chip: rgba(15, 23, 42, 0.025);
+    --chip-hover: rgba(13, 148, 136, 0.07);
+    --text: #0e1a2b;
+    --muted: #5c6b80;
+    --line: rgba(15, 23, 42, 0.10);
+    --accent: #0d9488;
+    --accent-strong: #0f766e;
+    --accent-soft: #d5f5ef;
+    --accent-halo: rgba(13, 148, 136, 0.14);
+    --accent-halo-strong: rgba(13, 148, 136, 0.38);
+    --shadow: 0 28px 70px -42px rgba(15, 23, 42, 0.45);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #070c15;
+      --dot: rgba(148, 163, 184, 0.09);
+      --surface: rgba(16, 24, 38, 0.84);
+      --surface-solid: #111b2c;
+      --input-bg: rgba(255, 255, 255, 0.035);
+      --chip: rgba(255, 255, 255, 0.03);
+      --chip-hover: rgba(45, 212, 191, 0.09);
+      --text: #e8eef8;
+      --muted: #95a3b8;
+      --line: rgba(148, 163, 184, 0.17);
+      --accent: #2dd4bf;
+      --accent-strong: #5eead4;
+      --accent-soft: rgba(20, 184, 166, 0.15);
+      --accent-halo: rgba(45, 212, 191, 0.14);
+      --accent-halo-strong: rgba(45, 212, 191, 0.36);
+      --shadow: 0 28px 70px -42px rgba(0, 0, 0, 0.85);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text);
+    background:
+      radial-gradient(58rem 34rem at 10% -10%, rgba(20, 184, 166, 0.14), transparent 62%),
+      radial-gradient(48rem 30rem at 100% 0%, rgba(99, 102, 241, 0.10), transparent 58%),
+      var(--bg);
+    background-attachment: fixed;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 72%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 72%);
+    pointer-events: none;
+  }
+
+  .shell {
+    width: min(1060px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: clamp(36px, 7vh, 68px) 0 40px;
+  }
+
+  .hero {
+    max-width: 760px;
+    margin-bottom: 34px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0 0 18px;
+    padding: 6px 12px;
+    color: var(--muted);
+    font: 600 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+
+  .eyebrow::before {
+    width: 6px;
+    height: 6px;
+    content: "";
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--accent-halo);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4.8vw, 3.35rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .lede {
+    max-width: 52ch;
+    margin: 16px 0 0;
+    color: var(--muted);
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    line-height: 1.7;
+  }
+
+  .calculator {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .panel {
+    border-radius: 26px;
+    padding: clamp(22px, 3vw, 30px);
+  }
+
+  .inputs {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .result {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: #e6fffb;
+    background: linear-gradient(155deg, #101b2e 0%, #0b3b39 58%, #0f514b 100%);
+    border: 1px solid rgba(94, 234, 212, 0.22);
+    box-shadow:
+      0 30px 70px -40px rgba(13, 148, 136, 0.65),
+      var(--shadow);
+  }
+
+  .result::after {
+    position: absolute;
+    top: -160px;
+    right: -120px;
+    width: 340px;
+    height: 340px;
+    content: "";
+    background: radial-gradient(circle, rgba(94, 234, 212, 0.32), transparent 68%);
+    border-radius: 50%;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+
+  .result > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .field + .field {
+    margin-top: 22px;
+  }
+
+  .field-head {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  label {
+    font-size: 0.9rem;
+    font-weight: 650;
+    letter-spacing: 0.01em;
+  }
+
+  .unit {
+    margin-left: 4px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .input-shell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0 16px;
+    background: var(--input-bg);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    transition:
+      background-color 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .input-shell:focus-within {
+    background: var(--surface-solid);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-halo);
+  }
+
+  .input-shell input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px 0;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    background: transparent;
+    border: 0;
+    outline: none;
+  }
+
+  .input-shell input::placeholder {
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .input-shell input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  .input-shell input[type="number"]::-webkit-inner-spin-button,
+  .input-shell input[type="number"]::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  .affix {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .hint {
+    margin: 8px 2px 0;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
+  }
+
+  .presets {
+    min-width: 0;
+    margin: 26px 0 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .presets legend {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: 650;
+  }
+
+  .legend-note {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+
+  .preset-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .preset {
+    padding: 10px 12px;
+    color: var(--text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    background: var(--chip);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    transition:
+      transform 0.15s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .preset:hover {
+    background: var(--chip-hover);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .preset:focus-visible {
+    outline: 3px solid var(--accent-halo-strong);
+    outline-offset: 2px;
+  }
+
+  .preset[aria-pressed="true"] {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+
+  .preset-name {
+    display: block;
+    overflow: hidden;
+    font-size: 0.8rem;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .preset-price {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.73rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .preset[aria-pressed="true"] .preset-price {
+    color: var(--accent-strong);
+  }
+
+  .result-top {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .result-label {
+    margin: 0;
+    color: rgba(230, 255, 251, 0.62);
+    font-size: 0.74rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .live {
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+    color: rgba(230, 255, 251, 0.7);
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+
+  .live::before {
+    width: 6px;
+    height: 6px;
+    content: "";
+    background: #5eead4;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.18);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  .result-value {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    margin: 26px 0 0;
+    color: #5eead4;
+    font-family: inherit;
+    font-size: clamp(2.7rem, 5.4vw, 4rem);
+    font-weight: 780;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.045em;
+    overflow-wrap: anywhere;
+  }
+
+  .result-value.is-long {
+    font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  }
+
+  .currency {
+    color: rgba(94, 234, 212, 0.72);
+    font-size: 0.5em;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .result-meta {
+    margin: 14px 0 28px;
+    color: rgba(230, 255, 251, 0.62);
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.65;
+  }
+
+  .facts {
+    display: grid;
+    gap: 11px;
+    margin: auto 0 0;
+    padding: 24px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+  }
+
+  .facts div {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .facts dt {
+    color: rgba(230, 255, 251, 0.5);
+    font-size: 0.76rem;
+  }
+
+  .facts dd {
+    margin: 0;
+    color: #effffb;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .note {
+    margin: 18px 4px 0;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.7;
+  }
+
+  .note strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(0.82);
+    }
+  }
+
+  @media (max-width: 860px) {
+    .shell {
+      padding-top: 36px;
+    }
+
+    .calculator {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .result {
+      min-height: 330px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .shell {
+      width: calc(100% - 28px);
+    }
+
+    .panel {
+      padding: 22px 18px;
+      border-radius: 22px;
+    }
+
+    .preset-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .result-value {
+      font-size: 2.65rem;
+    }
+
+    .result-meta {
+      margin-bottom: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="hero">
+    <p class="eyebrow">OpenSay / Demo</p>
+    <h1>AI Token 费用计算器</h1>
+    <p class="lede">输入 Token 用量与每百万 Token 单价，实时估算大模型调用成本。也可以点选常用模型，快速填入示例单价。</p>
+  </header>
+
+  <section class="calculator" aria-label="AI Token 费用计算">
+    <div class="panel inputs">
+      <div class="field">
+        <div class="field-head">
+          <label for="tokens">Token 数量<span class="unit">单位：万</span></label>
+        </div>
+        <div class="input-shell">
+          <input id="tokens" type="number" min="0" step="any" value="100" inputmode="decimal" autocomplete="off" aria-label="Token 数量（万）" aria-describedby="tokensHint">
+          <span class="affix" aria-hidden="true">万</span>
+        </div>
+        <p class="hint" id="tokensHint">= 1,000,000 tokens</p>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="price">每百万 Token 单价<span class="unit">单位：元</span></label>
+        </div>
+        <div class="input-shell">
+          <span class="affix" aria-hidden="true">¥</span>
+          <input id="price" type="number" min="0" step="0.01" value="2.00" inputmode="decimal" autocomplete="off" aria-label="每百万 Token 单价（元）" aria-describedby="priceHint">
+        </div>
+        <p class="hint" id="priceHint">按每 1,000,000 tokens 计价</p>
+      </div>
+
+      <fieldset class="presets">
+        <legend>
+          常用模型单价
+          <span class="legend-note">示例价 · 点击切换</span>
+        </legend>
+        <div class="preset-grid" id="presets">
+          <button class="preset" type="button" data-model="DeepSeek-V3" data-price="2">
+            <span class="preset-name">DeepSeek-V3</span>
+            <span class="preset-price">¥2 / 百万</span>
+          </button>
+          <button class="preset" type="button" data-model="DeepSeek-R1" data-price="4">
+            <span class="preset-name">DeepSeek-R1</span>
+            <span class="preset-price">¥4 / 百万</span>
+          </button>
+          <button class="preset" type="button" data-model="Qwen3-Max" data-price="6">
+            <span class="preset-name">Qwen3-Max</span>
+            <span class="preset-price">¥6 / 百万</span>
+          </button>
+          <button class="preset" type="button" data-model="Gemini 2.5 Pro" data-price="9">
+            <span class="preset-name">Gemini 2.5 Pro</span>
+            <span class="preset-price">¥9 / 百万</span>
+          </button>
+          <button class="preset" type="button" data-model="GPT-4o" data-price="18">
+            <span class="preset-name">GPT-4o</span>
+            <span class="preset-price">¥18 / 百万</span>
+          </button>
+          <button class="preset" type="button" data-model="Claude Sonnet 4" data-price="21">
+            <span class="preset-name">Claude Sonnet 4</span>
+            <span class="preset-price">¥21 / 百万</span>
+          </button>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="panel result">
+      <div class="result-top">
+        <p class="result-label">预估总费用</p>
+        <span class="live">实时计算</span>
+      </div>
+      <p class="result-value" aria-live="polite" aria-atomic="true">
+        <span class="currency" aria-hidden="true">¥</span><span id="total">2.00</span>
+      </p>
+      <p class="result-meta" id="formula">1,000,000 tokens × ¥2.00 / 百万 tokens</p>
+      <dl class="facts">
+        <div>
+          <dt>Token 用量</dt>
+          <dd id="factTokens">1,000,000 tokens</dd>
+        </div>
+        <div>
+          <dt>单价</dt>
+          <dd id="factPrice">¥2.00 / 百万</dd>
+        </div>
+        <div>
+          <dt>计价模型</dt>
+          <dd id="factModel">DeepSeek-V3</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <p class="note">
+    <strong>计算方式：</strong>Token 数量（万）× 10,000 ÷ 1,000,000 × 单价。预设单价为示例值（人民币 / 百万 tokens），实际费用以服务商账单为准。
+  </p>
+</main>
+
+<script>
+  (function () {
+    var TOKENS_PER_WAN = 10000;
+    var TOKENS_PER_MILLION = 1000000;
+
+    var tokensInput = document.getElementById("tokens");
+    var priceInput = document.getElementById("price");
+    var totalEl = document.getElementById("total");
+    var tokensHint = document.getElementById("tokensHint");
+    var formulaEl = document.getElementById("formula");
+    var factTokens = document.getElementById("factTokens");
+    var factPrice = document.getElementById("factPrice");
+    var factModel = document.getElementById("factModel");
+    var presets = Array.prototype.slice.call(document.querySelectorAll(".preset"));
+
+    var amountFormat = new Intl.NumberFormat("zh-CN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    var integerFormat = new Intl.NumberFormat("zh-CN", {
+      maximumFractionDigits: 0
+    });
+
+    function readValue(input) {
+      var value = Number.parseFloat(input.value);
+      return Number.isFinite(value) && value > 0 ? value : 0;
+    }
+
+    function syncModel(price) {
+      var activeModel = "";
+      presets.forEach(function (button) {
+        var isActive = Math.abs(Number.parseFloat(button.dataset.price) - price) < 1e-9 && price > 0;
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        if (isActive) {
+          activeModel = button.dataset.model;
+        }
+      });
+      factModel.textContent = activeModel || "自定义单价";
+    }
+
+    function render() {
+      var wan = readValue(tokensInput);
+      var price = readValue(priceInput);
+      var tokens = wan * TOKENS_PER_WAN;
+      var cost = tokens * price / TOKENS_PER_MILLION;
+
+      if (Number.isFinite(cost)) {
+        var formattedCost = amountFormat.format(cost);
+        totalEl.textContent = formattedCost;
+        totalEl.parentElement.classList.toggle("is-long", formattedCost.length > 12);
+      } else {
+        totalEl.textContent = "—";
+        totalEl.parentElement.classList.remove("is-long");
+      }
+
+      tokensHint.textContent = "= " + integerFormat.format(tokens) + " tokens";
+      formulaEl.textContent = integerFormat.format(tokens) + " tokens × ¥" + amountFormat.format(price) + " / 百万 tokens";
+      factTokens.textContent = integerFormat.format(tokens) + " tokens";
+      factPrice.textContent = "¥" + amountFormat.format(price) + " / 百万";
+      syncModel(price);
+    }
+
+    function normalizeOnBlur(input) {
+      var value = Number.parseFloat(input.value);
+      if (input.value === "" || !Number.isFinite(value) || value < 0) {
+        input.value = "0";
+        render();
+      }
+    }
+
+    tokensInput.addEventListener("input", render);
+    priceInput.addEventListener("input", render);
+    tokensInput.addEventListener("blur", function () {
+      normalizeOnBlur(tokensInput);
+    });
+    priceInput.addEventListener("blur", function () {
+      normalizeOnBlur(priceInput);
+    });
+
+    presets.forEach(function (button) {
+      button.addEventListener("click", function () {
+        priceInput.value = Number.parseFloat(button.dataset.price).toFixed(2);
+        render();
+      });
+    });
+
+    render();
+  })();
+</script>
+</body>
+</html>
